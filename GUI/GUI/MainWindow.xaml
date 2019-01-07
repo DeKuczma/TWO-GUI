@@ -1,21 +1,28 @@
 ﻿<Window x:Class="GUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI"
-        mc:Ignorable="d"
-        Title="Edytor zdjęć" Height="450" Width="800">
+        Title="{Binding Path=MainWindowTitle, Source={StaticResource Resources}}"
+        Height="600"
+        Width="800">
 		<DockPanel>
 			<Menu DockPanel.Dock="Top">
-				<MenuItem Header="_File">
-					<MenuItem Header="_New" />
-					<MenuItem Header="_Open" />
-					<MenuItem Header="_Save" />
+                <MenuItem Name="FileMenuItem" Header="{Binding Path=FileMenuItem, Source={StaticResource Resources}}">
+                    <MenuItem Name="OpenManuItem" Header="{Binding Path=OpenMenuItem, Source={StaticResource Resources}}" Click="OpenManuItem_Click" />
+                    <MenuItem Name="SaveMenuItem" Header="{Binding Path=SaveMenuItem, Source={StaticResource Resources}}" />
+                    <Separator />
+                    <MenuItem Name="LanguageMenuItem" Header="{Binding Path=LanguageMenuItem, Source={StaticResource Resources}}">
+                        <MenuItem Name="EnglishMenuItem" Header="{Binding Path=EnglishMenuItem, Source={StaticResource Resources}}" IsCheckable="True" Click="ChangeLanguage_Click" IsChecked="True" />
+                        <MenuItem Name="PolishMenuItem" Header="{Binding Path=PolishMenuItem, Source={StaticResource Resources}}" IsCheckable="True" Click="ChangeLanguage_Click" IsChecked="False" />                    
+                    </MenuItem>
 					<Separator />
-					<MenuItem Header="_Exit" />
-				</MenuItem>
-			</Menu>
-			<TextBox AcceptsReturn="True" />
-		</DockPanel>
+					<MenuItem Name="ExitMenuItem" Header="{Binding Path=ExitMenuItem, Source={StaticResource Resources}}" Click="ExitMenuItem_Click" />
+            </MenuItem>
+            <MenuItem Header="{Binding Path=EditMenuItem, Source={StaticResource Resources}}">
+                <MenuItem Name="RotateRight" Header="{Binding Path=RotateRightMenuItem, Source={StaticResource Resources}}" Click="RotateRight_Click" />
+                <MenuItem Name="RotateLeft" Header="{Binding Path=RotateLeftMenuItem, Source={StaticResource Resources}}" Click="RotateLeft_Click" />
+            </MenuItem>
+        </Menu>
+            <TextBox AcceptsReturn="True" />
+        <Image x:Name="DisplayImage" Height="551" VerticalAlignment="Bottom" Width="688"/>
+    </DockPanel>
 </Window>

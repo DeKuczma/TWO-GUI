@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditMenuItem" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edytuj</value>
   </data>
   <data name="EnglishMenuItem" xml:space="preserve">
-    <value>English</value>
+    <value>Angielski</value>
   </data>
   <data name="ExitMenuItem" xml:space="preserve">
-    <value>_Exit</value>
+    <value>_Wyjdź</value>
   </data>
   <data name="FileMenuItem" xml:space="preserve">
-    <value>_File</value>
+    <value>_Plik</value>
   </data>
   <data name="LanguageMenuItem" xml:space="preserve">
-    <value>_Language</value>
+    <value>_Język</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
-    <value>Image Editor</value>
+    <value>Edytor zdjęć</value>
   </data>
   <data name="OpenMenuItem" xml:space="preserve">
-    <value>_Open</value>
+    <value>_Otwórz</value>
   </data>
   <data name="PolishMenuItem" xml:space="preserve">
-    <value>Polish</value>
+    <value>Polski</value>
   </data>
   <data name="RotateLeftMenuItem" xml:space="preserve">
-    <value>Rotate left</value>
+    <value>Obróć w lewo</value>
   </data>
   <data name="RotateRightMenuItem" xml:space="preserve">
-    <value>Rotate right</value>
+    <value>Obróć w prawo</value>
   </data>
   <data name="SaveMenuItem" xml:space="preserve">
-    <value>_Save</value>
+    <value>_Zapisz</value>
   </data>
 </root>
