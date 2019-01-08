@@ -4,25 +4,35 @@
         Title="{Binding Path=MainWindowTitle, Source={StaticResource Resources}}"
         Height="600"
         Width="800">
-		<DockPanel>
-			<Menu DockPanel.Dock="Top">
-                <MenuItem Name="FileMenuItem" Header="{Binding Path=FileMenuItem, Source={StaticResource Resources}}">
-                    <MenuItem Name="OpenManuItem" Header="{Binding Path=OpenMenuItem, Source={StaticResource Resources}}" Click="OpenManuItem_Click" />
-                    <MenuItem Name="SaveMenuItem" Header="{Binding Path=SaveMenuItem, Source={StaticResource Resources}}" />
-                    <Separator />
-                    <MenuItem Name="LanguageMenuItem" Header="{Binding Path=LanguageMenuItem, Source={StaticResource Resources}}">
-                        <MenuItem Name="EnglishMenuItem" Header="{Binding Path=EnglishMenuItem, Source={StaticResource Resources}}" IsCheckable="True" Click="ChangeLanguage_Click" IsChecked="True" />
-                        <MenuItem Name="PolishMenuItem" Header="{Binding Path=PolishMenuItem, Source={StaticResource Resources}}" IsCheckable="True" Click="ChangeLanguage_Click" IsChecked="False" />                    
-                    </MenuItem>
-					<Separator />
-					<MenuItem Name="ExitMenuItem" Header="{Binding Path=ExitMenuItem, Source={StaticResource Resources}}" Click="ExitMenuItem_Click" />
+    <DockPanel>
+        <Grid Name ="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        </Grid>
+        <Menu DockPanel.Dock="Top" Grid.Row="1" Height="25" VerticalAlignment="Center">
+            <MenuItem Name="FileMenuItem" Height="25" Header="{Binding Path=FileMenuItem, Source={StaticResource Resources}}">
+                <MenuItem Name="OpenManuItem" Header="{Binding Path=OpenMenuItem, Source={StaticResource Resources}}" Click="OpenManuItem_Click" />
+                <MenuItem Name="SaveMenuItem" Header="{Binding Path=SaveMenuItem, Source={StaticResource Resources}}" />
+                <Separator />
+                <MenuItem Name="LanguageMenuItem" Height="25" VerticalAlignment="Center" Header="{Binding Path=LanguageMenuItem, Source={StaticResource Resources}}">
+                    <MenuItem Name="EnglishMenuItem" Header="{Binding Path=EnglishMenuItem, Source={StaticResource Resources}}" IsCheckable="True" Click="ChangeLanguage_Click" IsChecked="True" />
+                    <MenuItem Name="PolishMenuItem" Header="{Binding Path=PolishMenuItem, Source={StaticResource Resources}}" IsCheckable="True" Click="ChangeLanguage_Click" IsChecked="False" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="ExitMenuItem" Header="{Binding Path=ExitMenuItem, Source={StaticResource Resources}}" Click="ExitMenuItem_Click" />
             </MenuItem>
             <MenuItem Header="{Binding Path=EditMenuItem, Source={StaticResource Resources}}">
                 <MenuItem Name="RotateRight" Header="{Binding Path=RotateRightMenuItem, Source={StaticResource Resources}}" Click="RotateRight_Click" />
                 <MenuItem Name="RotateLeft" Header="{Binding Path=RotateLeftMenuItem, Source={StaticResource Resources}}" Click="RotateLeft_Click" />
             </MenuItem>
         </Menu>
-            <TextBox AcceptsReturn="True" />
-        <Image x:Name="DisplayImage" Height="551" VerticalAlignment="Bottom" Width="688"/>
+        <Menu DockPanel.Dock="Top" Name="ToolsDock" Grid.Row="2" Height="25">
+            <Grid Name="ToolsGrid" >
+            </Grid>
+        </Menu>
+        <Image x:Name="DisplayImage" Height="Auto" VerticalAlignment="Top" Width="Auto" Grid.Row="2"/>
     </DockPanel>
 </Window>

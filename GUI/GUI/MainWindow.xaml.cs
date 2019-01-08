@@ -24,23 +24,29 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Bitmap image;
+        public Bitmap image;
         private List<Bitmap> prevOperations;
         private List<Bitmap> nextOperations;
+        private List<Plugin> plugins = new List<Plugin>();
 
         public MainWindow()
         {
+
             CultureResources.ChangeCulture(Properties.Settings.Default.DefaultCulture);
             InitializeComponent();
-        }
+            ColumnDefinition customColumn = new ColumnDefinition();
+            customColumn.Width = new GridLength(25);
+            ToolsGrid.ColumnDefinitions.Add(customColumn);
 
-        private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
-        {
-            bool polishClicked = (sender == PolishMenuItem);
-
-            CultureResources.ChangeCulture(new CultureInfo(polishClicked ? "pl" : "en"));
-            PolishMenuItem.IsChecked = polishClicked;
-            EnglishMenuItem.IsChecked = !polishClicked;
+            Undo undo = new Undo();
+            Button myTool = new System.Windows.Controls.Button();
+            myTool.Click += UpdateImageRef;
+            myTool.Click += undo.Click;
+            myTool.Click += PluginClick;
+            myTool.Content = undo.GetImage();
+            myTool.ToolTip = undo.GetTooltipText();
+            ToolsGrid.Children.Add(myTool);
+            plugins.Add(undo);
         }
 
         private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
@@ -60,6 +66,14 @@ namespace GUI
 
         }
 
+        private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            bool polishClicked = (sender == PolishMenuItem);
+
+            CultureResources.ChangeCulture(new CultureInfo(polishClicked ? "pl" : "en"));
+            PolishMenuItem.IsChecked = polishClicked;
+            EnglishMenuItem.IsChecked = !polishClicked;
+        }
         private void RotateRight_Click(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < image.Width; i++)
@@ -73,19 +87,33 @@ namespace GUI
 
         }
 
+        private void UpdateImageRef(object sender, RoutedEventArgs e)
+        {
+            foreach (Plugin plugin in plugins)
+                plugin.SetImage(image);
+        }
+
+        public void PluginClick(object sender, RoutedEventArgs e)
+        {            
+            UpdateImage();
+        }
+
         private void UpdateImage()
         {
-            using (var ms = new MemoryStream())
+            if (image != null)
             {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                ms.Position = 0;
+                using (var ms = new MemoryStream())
+                {
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    ms.Position = 0;
 
-                var bi = new BitmapImage();
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
-                DisplayImage.Source = bi;
+                    var bi = new BitmapImage();
+                    bi.BeginInit();
+                    bi.CacheOption = BitmapCacheOption.OnLoad;
+                    bi.StreamSource = ms;
+                    bi.EndInit();
+                    DisplayImage.Source = bi;
+                }
             }
         }
     }
