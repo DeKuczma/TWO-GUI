@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EditMenuItem" xml:space="preserve">
-    <value>Edytuj</value>
-  </data>
-  <data name="EnglishMenuItem" xml:space="preserve">
-    <value>Angielski</value>
-  </data>
-  <data name="ExitMenuItem" xml:space="preserve">
-    <value>_Wyjdź</value>
-  </data>
-  <data name="FileMenuItem" xml:space="preserve">
-    <value>_Plik</value>
-  </data>
-  <data name="LanguageMenuItem" xml:space="preserve">
-    <value>_Język</value>
-  </data>
-  <data name="MainWindowTitle" xml:space="preserve">
-    <value>Edytor zdjęć</value>
-  </data>
-  <data name="OpenMenuItem" xml:space="preserve">
-    <value>_Otwórz</value>
-  </data>
-  <data name="PolishMenuItem" xml:space="preserve">
-    <value>Polski</value>
-  </data>
-  <data name="RotateLeftMenuItem" xml:space="preserve">
-    <value>Obróć w lewo</value>
-  </data>
-  <data name="RotateRightMenuItem" xml:space="preserve">
-    <value>Obróć w prawo</value>
-  </data>
-  <data name="SaveMenuItem" xml:space="preserve">
-    <value>_Zapisz</value>
-  </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
 </root>

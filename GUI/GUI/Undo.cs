@@ -4,36 +4,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace GUI
 {
-    class Undo : Plugin
+    class Undo : IPlugin
     {
-        Bitmap bmp;
-        public void Click(object sender, RoutedEventArgs e)
+        private IImageOperation imageOperation;
+
+        public Image GetImage()
         {
-            if (bmp != null)
-            {
-                for (int i = 0; i < bmp.Width; i++)
-                    for (int j = 0; j < bmp.Height; j++)
-                        bmp.SetPixel(i, j, Color.BlanchedAlmond);
-            }
+            return new Bitmap("Undo.png");
         }
 
-        public void SetImage(Bitmap image)
+        public void ProcessImage(object sender, EventArgs e)
         {
-            bmp = image;
+
         }
 
-        public Bitmap GetImage()
+        public void SetImageOperation(IImageOperation newImageOperation)
         {
-            return new Bitmap("Undo.bmp");
-        }
-
-        public string GetTooltipText()
-        {
-            return "Undo";
+            imageOperation = newImageOperation;
         }
     }
 }
