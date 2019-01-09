@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace GUI
 {
-    class Undo : IPlugin
+    class Redo : IPlugin
     {
         private IImageOperation imageOperation;
 
         public Image GetImage()
         {
-            return new Bitmap("Undo.png");
+            return new Bitmap("Redo.png");
         }
 
         public void ProcessImage(object sender, EventArgs e)
         {
-            imageOperation.UndoImage();
+            imageOperation.RedoImage();
         }
 
         public void SetImageOperation(IImageOperation newImageOperation)

@@ -23,14 +23,14 @@ namespace GUI
             }
         }
 
-        public Bitmap GetRedoImage()
+        public void RedoImage()
         {
             if (undoImage.Count == 0)
-                return actualImage;
+                return;
             undoImage.Add((Bitmap)actualImage.Clone());
             actualImage = redoImage[redoImage.Count - 1];
             redoImage.RemoveAt(redoImage.Count - 1);
-            return actualImage;
+            UpdateImage();
         }
 
         public void SetPictureBox(PictureBox newPictureBox)
@@ -38,14 +38,14 @@ namespace GUI
             pictureBox = newPictureBox;
         }
 
-        public Bitmap GetUndoImage()
+        public void UndoImage()
         {
             if (redoImage.Count == 0)
-                return actualImage;
+                return;
             redoImage.Add((Bitmap)actualImage.Clone());
             actualImage = redoImage[redoImage.Count - 1];
             undoImage.RemoveAt(undoImage.Count - 1);
-            return actualImage;
+            UpdateImage();
         }
 
         public Bitmap GetActualImage() => actualImage;

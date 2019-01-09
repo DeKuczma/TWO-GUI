@@ -19,10 +19,13 @@ namespace GUI
         public ImageEditor()
         {
             InitializeComponent();
+            englishToolStripMenuItem.Checked = true;
             imageOperation = new ImageOperation();
             imageOperation.SetPictureBox(pictureBox);
             Undo undo = new Undo();
+            Redo redo = new Redo();
             AddToolItem(undo);
+            AddToolItem(redo);
         }
 
         private void AddToolItem(IPlugin plugin)
@@ -55,10 +58,20 @@ namespace GUI
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "Image Files (*.bmp, *.jpg)|*.bmp;*.jpg";
+            openFile.Filter = "Image Files (*.jpg)|*.jpg";
             if (openFile.ShowDialog() == DialogResult.OK)
             {
                 imageOperation.SetNewImage(new Bitmap(openFile.FileName));
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Image Files (*.jpg)|*.jpg";
+            if(saveFile.ShowDialog() == DialogResult.OK)
+            {
+                imageOperation.GetActualImage().Save(saveFile.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
         }
     }

@@ -10,8 +10,8 @@ namespace GUI
 {
     interface IImageOperation
     {
-        Bitmap GetUndoImage();
-        Bitmap GetRedoImage();
+        void UndoImage();
+        void RedoImage();
         Bitmap GetActualImage();
         void SetPictureBox(PictureBox newPictureBox);
         void SetNewImage(Bitmap image);
