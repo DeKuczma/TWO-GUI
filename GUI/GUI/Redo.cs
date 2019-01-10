@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InterfaceBridge;
 
 namespace GUI
 {
@@ -11,7 +12,7 @@ namespace GUI
     {
         private IImageOperation imageOperation;
 
-        public Image GetImage()
+        public Bitmap GetImage()
         {
             return new Bitmap("Redo.png");
         }

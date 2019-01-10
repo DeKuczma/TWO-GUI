@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GUI
+namespace InterfaceBridge
 {
-    interface IImageOperation
+    public interface IImageOperation
     {
         void UndoImage();
         void RedoImage();

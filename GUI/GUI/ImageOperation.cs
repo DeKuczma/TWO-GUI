@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InterfaceBridge;
 
 namespace GUI
 {
@@ -17,15 +18,14 @@ namespace GUI
 
         public void ChangeImage(Bitmap newImage)
         {
-            if (actualImage != newImage)
-            {
-                undoImage.Add(newImage);
-            }
+            undoImage.Add(actualImage);
+            actualImage = newImage;
+            UpdateImage();
         }
 
         public void RedoImage()
         {
-            if (undoImage.Count == 0)
+            if (redoImage.Count == 0)
                 return;
             undoImage.Add((Bitmap)actualImage.Clone());
             actualImage = redoImage[redoImage.Count - 1];
@@ -40,10 +40,10 @@ namespace GUI
 
         public void UndoImage()
         {
-            if (redoImage.Count == 0)
+            if (undoImage.Count == 0)
                 return;
             redoImage.Add((Bitmap)actualImage.Clone());
-            actualImage = redoImage[redoImage.Count - 1];
+            actualImage = undoImage[undoImage.Count - 1];
             undoImage.RemoveAt(undoImage.Count - 1);
             UpdateImage();
         }

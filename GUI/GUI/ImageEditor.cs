@@ -4,11 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InterfaceBridge;
 
 namespace GUI
 {
@@ -26,10 +29,12 @@ namespace GUI
             Redo redo = new Redo();
             AddToolItem(undo);
             AddToolItem(redo);
+            LoadPlugins();
         }
 
         private void AddToolItem(IPlugin plugin)
         {
+            plugin.SetImageOperation(imageOperation);
             ToolStripButton stripButton = new ToolStripButton();
             stripButton.Image = plugin.GetImage();
             stripButton.ToolTipText = "TODO";
@@ -72,6 +77,49 @@ namespace GUI
             if(saveFile.ShowDialog() == DialogResult.OK)
             {
                 imageOperation.GetActualImage().Save(saveFile.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+        }
+
+        static void EnumFiles(string path, ref List<string> files)
+        {
+            foreach (var file in Directory.EnumerateFiles(path, "*.dll"))
+            {
+                files.Add(file);
+            }
+
+            foreach (var subPath in Directory.EnumerateDirectories(path))
+            {
+                EnumFiles(subPath, ref files);
+            }
+        }
+
+        private void LoadPlugins()
+        {
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(ImageEditor));
+            List<string> dllFiles = new List<string>();
+
+            EnumFiles(".", ref dllFiles);
+
+            foreach (var file in dllFiles)
+            {
+                var pluginAssembly = Assembly.LoadFrom(file);
+
+                var types = pluginAssembly.GetTypes();
+
+                foreach (var type in types)
+                {
+                    Type contract = type.GetInterfaces().FirstOrDefault();
+                    if (contract != null && !type.IsAbstract)
+                    {
+                        var o = Activator.CreateInstance(type);
+                        var w = o as IPlugin;
+
+                        if (w != null)
+                        {
+                            AddToolItem(w);
+                        }
+                    }
+                }
             }
         }
     }

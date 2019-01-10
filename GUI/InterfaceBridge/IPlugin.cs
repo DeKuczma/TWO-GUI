@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUI
+namespace InterfaceBridge
 {
-    interface IPlugin
+    public interface IPlugin
     {
         void SetImageOperation(IImageOperation imageOperation);
-        Image GetImage();
+        Bitmap GetImage();
         void ProcessImage(object sender, EventArgs e);
     }
 }
