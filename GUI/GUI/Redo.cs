@@ -12,9 +12,29 @@ namespace GUI
     {
         private IImageOperation imageOperation;
 
+        public string GetEnglishName()
+        {
+            return "Redo";
+        }
+
+        public string GetEnglishTooltipName()
+        {
+            return "Redo";
+        }
+
         public Bitmap GetImage()
         {
             return new Bitmap("Redo.png");
+        }
+
+        public string GetPolishName()
+        {
+            return "Wykonaj ponownie";
+        }
+
+        public string GetPolishTooltopName()
+        {
+            return "Wykonaj ponownie";
         }
 
         public void ProcessImage(object sender, EventArgs e)

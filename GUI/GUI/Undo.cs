@@ -23,16 +23,16 @@ namespace GUI
         {
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += DoWork;
-            backgroundWorker.RunWorkerCompleted += update;
+            backgroundWorker.RunWorkerCompleted += Update;
             backgroundWorker.RunWorkerAsync();
         }
 
         private void DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
         }
 
-        private void update(object sender, RunWorkerCompletedEventArgs e)
+        private void Update(object sender, RunWorkerCompletedEventArgs e)
         {
             imageOperation.UndoImage();
         }
@@ -40,6 +40,26 @@ namespace GUI
         public void SetImageOperation(IImageOperation newImageOperation)
         {
             imageOperation = newImageOperation;
+        }
+
+        public string GetPolishName()
+        {
+            return "Cofnij";
+        }
+
+        public string GetEnglishName()
+        {
+            return "Undo";
+        }
+
+        public string GetPolishTooltopName()
+        {
+            return "Cofnij";
+        }
+
+        public string GetEnglishTooltipName()
+        {
+            return "Undo";
         }
     }
 }

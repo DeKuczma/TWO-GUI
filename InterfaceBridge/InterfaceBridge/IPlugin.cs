@@ -12,5 +12,9 @@ namespace InterfaceBridge
         void SetImageOperation(IImageOperation imageOperation);
         Bitmap GetImage();
         void ProcessImage(object sender, EventArgs e);
+        String GetPolishName();
+        String GetEnglishName();
+        String GetPolishTooltopName();
+        String GetEnglishTooltipName();
     }
 }

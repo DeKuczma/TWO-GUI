@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{EA8F3C78-FA8E-4DC4-A5D3-6CE9B2B39FD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceBridge", "InterfaceBridge\InterfaceBridge.csproj", "{6D447EEF-0A80-40E4-B198-873F9DA33C0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,26 @@ Global
 		{EA8F3C78-FA8E-4DC4-A5D3-6CE9B2B39FD6}.Release|x64.Build.0 = Release|Any CPU
 		{EA8F3C78-FA8E-4DC4-A5D3-6CE9B2B39FD6}.Release|x86.ActiveCfg = Release|Any CPU
 		{EA8F3C78-FA8E-4DC4-A5D3-6CE9B2B39FD6}.Release|x86.Build.0 = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|ARM.Build.0 = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|ARM64.Build.0 = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|x64.Build.0 = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D447EEF-0A80-40E4-B198-873F9DA33C0B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
