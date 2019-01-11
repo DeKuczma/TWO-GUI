@@ -62,12 +62,23 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <Resource Include="Properties\RotateLeft.pl.resx" />
+    <Resource Include="Properties\RotateLeft.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RotateLeft.Designer.cs</LastGenOutput>
+    </Resource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="RotateLeft90.cs" />
+    <Compile Include="Properties\RotateLeft.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RotateLeft.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RotateLeft.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

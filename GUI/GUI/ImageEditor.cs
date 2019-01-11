@@ -7,22 +7,26 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfaceBridge;
 
+
 namespace GUI
 {
     public partial class ImageEditor : Form
     {
         private ImageOperation imageOperation;
+        List<Type> pluginTypes;
 
         public ImageEditor()
         {
             InitializeComponent();
-            englishToolStripMenuItem.Checked = true;
+            englishToolStripMenuItem.Checked = false;
+            polishToolStripMenuItem.Checked = true;
             imageOperation = new ImageOperation();
             imageOperation.SetPictureBox(pictureBox);
             Undo undo = new Undo();
@@ -36,6 +40,7 @@ namespace GUI
         {
             plugin.SetImageOperation(imageOperation);
             ToolStripButton stripButton = new ToolStripButton();
+            stripButton.Name = plugin.GetType().ToString();
             stripButton.Image = plugin.GetImage();
             stripButton.ToolTipText = "TODO";
             stripButton.Click += plugin.ProcessImage;
@@ -52,13 +57,6 @@ namespace GUI
         {
             this.Close();
         }
-
-        #region Localization
-        private void ChangeCulture(CultureInfo culture)
-        {
-            
-        }
-        #endregion
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -97,6 +95,11 @@ namespace GUI
         {
             ComponentResourceManager resources = new ComponentResourceManager(typeof(ImageEditor));
             List<string> dllFiles = new List<string>();
+            pluginTypes = new List<Type>();
+            //ResourceReader enResources = new ResourceReader(".\\ImageEditor.resx");
+            //ResourceReader plResources = new ResourceReader(".\\ImageEdit.pl.resx");
+
+            ResourceManager rM = new ResourceManager(typeof(ImageEditor));
 
             EnumFiles(".", ref dllFiles);
 
@@ -117,10 +120,80 @@ namespace GUI
                         if (w != null)
                         {
                             AddToolItem(w);
+                            pluginTypes.Add(type);
+                            //pluginAssembly.GetManifestResourceInfo("RotateLeft");
+                            //// "test" is your image name
+                            //ResourceManager resourcemanager = new ResourceManager("RotateLeft.Properties", pluginAssembly);
+                            //object obj = resourcemanager.GetObject("RotateLeftText", new global::System.Globalization.CultureInfo("en-US"));
+                            //string tekst = (string)obj;
                         }
                     }
                 }
             }
         }
+
+
+        #region Localization
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender == polishToolStripMenuItem)
+            {
+                ChangeCulture(new CultureInfo("pl"));
+            }
+            else
+            {
+                ChangeCulture(new CultureInfo("en"));
+            }
+        }
+
+        private void ChangeCulture(CultureInfo culture)
+        {
+            Thread.CurrentThread.CurrentUICulture = culture;
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(ImageEditor));
+
+            resources.ApplyResources(this, "$this", culture);
+
+            UpdateControlsCulture(this, resources, culture);
+
+            if (culture.Name == "pl")
+            {
+                polishToolStripMenuItem.Checked = true;
+                englishToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                englishToolStripMenuItem.Checked = true;
+                polishToolStripMenuItem.Checked = false;
+            }
+        }
+
+        private void UpdateControlsCulture(Control control, ComponentResourceManager resourceProvider,
+            CultureInfo culture)
+        {
+            control.SuspendLayout();
+            resourceProvider.ApplyResources(control, control.Name, culture);
+
+            foreach (Control ctrl in control.Controls)
+            {
+                //toolTip.SetToolTip(ctrl, resourceProvider.GetString(ctrl.Name + ".ToolTip"));
+                UpdateControlsCulture(ctrl, resourceProvider, culture);
+            }
+
+            control.ResumeLayout(false);
+        }
+
+        private void UpdateToolStripItemsCulture(ToolStripItem item, ComponentResourceManager resourceProvider, CultureInfo culture)
+        {
+            resourceProvider.ApplyResources(item, item.Name, culture);
+
+            if (item is ToolStripMenuItem)
+            {
+                foreach (ToolStripItem it in ((ToolStripMenuItem)item).DropDownItems)
+                {
+                    UpdateToolStripItemsCulture(it, resourceProvider, culture);
+                }
+            }
+        }
+        #endregion
     }
 }

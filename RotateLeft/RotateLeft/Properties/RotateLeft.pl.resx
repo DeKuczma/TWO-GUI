@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RotateLeftText" xml:space="preserve">
-    <value>Rotate left</value>
+    <value>Obróć w lewo</value>
   </data>
   <data name="RotateLeftTooltip" xml:space="preserve">
-    <value>Rotate image left by 90 degrees</value>
+    <value>Obróć zdjęcie w lewo o 90 stopni</value>
   </data>
 </root>

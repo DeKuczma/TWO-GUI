@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using InterfaceBridge;
 
-class RotateLeft90 : IPlugin
+class RotateLeft : IPlugin
 {
     private IImageOperation imageOperation;
 
