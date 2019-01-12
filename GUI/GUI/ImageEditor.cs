@@ -68,6 +68,8 @@ namespace GUI
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (imageOperation.IsBusy())
+                return;
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Image Files (*.jpg)|*.jpg";
             if (openFile.ShowDialog() == DialogResult.OK)

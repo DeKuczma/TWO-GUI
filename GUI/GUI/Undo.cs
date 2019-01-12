@@ -23,7 +23,6 @@ namespace GUI
         {
             if (imageOperation.IsBusy())
                 return;
-            imageOperation.ChangeState();
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += DoWork;
             backgroundWorker.RunWorkerCompleted += Update;
@@ -32,13 +31,12 @@ namespace GUI
 
         private void DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(10);
         }
 
         private void Update(object sender, RunWorkerCompletedEventArgs e)
         {
             imageOperation.UndoImage();
-            imageOperation.ChangeState();
         }
 
         public void SetImageOperation(IImageOperation newImageOperation)
