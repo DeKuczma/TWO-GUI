@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using InterfaceBridge;
 
-class RotateRight90 : IPlugin
+class ReverseColorsRGB : IPlugin
 {
     private IImageOperation imageOperation;
     private Bitmap processedBitmap;
@@ -16,7 +16,7 @@ class RotateRight90 : IPlugin
 
     public Bitmap GetImage()
     {
-        return new Bitmap("RotateRight.png");
+        return new Bitmap("ReverseColors.png");
     }
 
     public void ProcessImage(object sender, EventArgs e)
@@ -36,9 +36,17 @@ class RotateRight90 : IPlugin
         if (actualBitmap != null)
         {
             processedBitmap = (Bitmap)actualBitmap.Clone();
-            processedBitmap.SetResolution(actualBitmap.Height, actualBitmap.Width);
-            processedBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            Thread.Sleep(100);
+            for(int i = 0; i < processedBitmap.Width; i++)
+                for(int j = 0; j < processedBitmap.Height; j++)
+                {
+                    Color color = processedBitmap.GetPixel(i, j);
+                    int R = 255 - color.R;
+                    int G = 255 - color.G;
+                    int B = 255 - color.B;
+                    color = Color.FromArgb(R, G, B);
+                    processedBitmap.SetPixel(i, j, color);
+                }
+            Thread.Sleep(10000);
         }
     }
 
@@ -56,7 +64,7 @@ class RotateRight90 : IPlugin
 
     public string GetName()
     {
-        return "rotateRight90";
+        return "reverseColorsRGB";
     }
 
     public ComponentResourceManager GetResourceManager()

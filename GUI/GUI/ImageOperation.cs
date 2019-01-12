@@ -29,6 +29,8 @@ namespace GUI
 
         public void RedoImage()
         {
+            if (busy)
+                return;
             if (redoImage.Count == 0 || actualImage == null)
                 return;
             undoImage.Add((Bitmap)actualImage.Clone());
@@ -44,6 +46,8 @@ namespace GUI
 
         public void UndoImage()
         {
+            if (busy)
+                return;
             if (undoImage.Count == 0 || actualImage == null)
                 return;
             redoImage.Add((Bitmap)actualImage.Clone());
