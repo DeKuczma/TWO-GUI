@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,14 +28,14 @@ namespace GUI
             return new Bitmap("Redo.png");
         }
 
-        public string GetPolishName()
+        public string GetName()
         {
-            return "Wykonaj ponownie";
+            return "redo";
         }
 
-        public string GetPolishTooltopName()
+        public ComponentResourceManager GetResourceManager()
         {
-            return "Wykonaj ponownie";
+            return new ComponentResourceManager(this.GetType());
         }
 
         public void ProcessImage(object sender, EventArgs e)

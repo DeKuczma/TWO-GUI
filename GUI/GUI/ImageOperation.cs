@@ -15,9 +15,13 @@ namespace GUI
         PictureBox pictureBox;
         List<Bitmap> undoImage = new List<Bitmap>();
         List<Bitmap> redoImage = new List<Bitmap>();
+        private bool busy = false;
 
         public void ChangeImage(Bitmap newImage)
         {
+            if (newImage == null)
+                return;
+
             undoImage.Add(actualImage);
             actualImage = newImage;
             UpdateImage();
@@ -25,7 +29,7 @@ namespace GUI
 
         public void RedoImage()
         {
-            if (redoImage.Count == 0)
+            if (redoImage.Count == 0 || actualImage == null)
                 return;
             undoImage.Add((Bitmap)actualImage.Clone());
             actualImage = redoImage[redoImage.Count - 1];
@@ -40,7 +44,7 @@ namespace GUI
 
         public void UndoImage()
         {
-            if (undoImage.Count == 0)
+            if (undoImage.Count == 0 || actualImage == null)
                 return;
             redoImage.Add((Bitmap)actualImage.Clone());
             actualImage = undoImage[undoImage.Count - 1];
@@ -60,9 +64,22 @@ namespace GUI
 
         private void UpdateImage()
         {
-            pictureBox.Width = actualImage.Width;
-            pictureBox.Height = actualImage.Height;
-            pictureBox.Image = actualImage;
+            if (actualImage != null)
+            {
+                pictureBox.Width = actualImage.Width;
+                pictureBox.Height = actualImage.Height;
+                pictureBox.Image = actualImage;
+            }
+        }
+
+        public void ChangeState()
+        {
+            busy = !busy;
+        }
+
+        public bool IsBusy()
+        {
+            return busy;
         }
     }
 }

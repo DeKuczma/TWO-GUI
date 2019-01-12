@@ -16,5 +16,7 @@ namespace InterfaceBridge
         void SetPictureBox(PictureBox newPictureBox);
         void SetNewImage(Bitmap image);
         void ChangeImage(Bitmap newImage);
+        void ChangeState();
+        bool IsBusy();
     }
 }

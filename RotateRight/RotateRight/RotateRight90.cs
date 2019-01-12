@@ -12,6 +12,7 @@ class RotateRight90 : IPlugin
 {
     private IImageOperation imageOperation;
     private Bitmap processedBitmap;
+    private ComponentResourceManager cM;
 
     public Bitmap GetImage()
     {
@@ -20,7 +21,6 @@ class RotateRight90 : IPlugin
 
     public void ProcessImage(object sender, EventArgs e)
     {
-
         BackgroundWorker backgroundWorker = new BackgroundWorker();
         backgroundWorker.DoWork += DoWork;
         backgroundWorker.RunWorkerCompleted += Update;
@@ -30,10 +30,13 @@ class RotateRight90 : IPlugin
     private void DoWork(object sender, DoWorkEventArgs e)
     {
         Bitmap actualBitmap = imageOperation.GetActualImage();
-        processedBitmap = (Bitmap)actualBitmap.Clone();
-        processedBitmap.SetResolution(actualBitmap.Height, actualBitmap.Width);
-        processedBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
-        Thread.Sleep(100);
+        if (actualBitmap != null)
+        {
+            processedBitmap = (Bitmap)actualBitmap.Clone();
+            processedBitmap.SetResolution(actualBitmap.Height, actualBitmap.Width);
+            processedBitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            Thread.Sleep(100);
+        }
     }
 
     private void Update(object sender, RunWorkerCompletedEventArgs e)
@@ -47,23 +50,15 @@ class RotateRight90 : IPlugin
         this.imageOperation = imageOperation;
     }
 
-    public string GetPolishName()
+    public string GetName()
     {
-        return "Obróc w prawo";
+        return "rotateRight90";
     }
 
-    public string GetEnglishName()
+    public ComponentResourceManager GetResourceManager()
     {
-        return "Rotate right";
-    }
-
-    public string GetPolishTooltopName()
-    {
-        return "Obróć obrazek w prawo o 90 stopni";
-    }
-
-    public string GetEnglishTooltipName()
-    {
-        return "Rotate image right by 90 degrees";
+        if (cM == null)
+            cM = new ComponentResourceManager(this.GetType());
+        return cM;
     }
 }

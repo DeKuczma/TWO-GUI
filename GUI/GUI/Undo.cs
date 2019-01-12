@@ -21,6 +21,9 @@ namespace GUI
 
         public void ProcessImage(object sender, EventArgs e)
         {
+            if (imageOperation.IsBusy())
+                return;
+            imageOperation.ChangeState();
             BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += DoWork;
             backgroundWorker.RunWorkerCompleted += Update;
@@ -35,6 +38,7 @@ namespace GUI
         private void Update(object sender, RunWorkerCompletedEventArgs e)
         {
             imageOperation.UndoImage();
+            imageOperation.ChangeState();
         }
 
         public void SetImageOperation(IImageOperation newImageOperation)
@@ -42,24 +46,14 @@ namespace GUI
             imageOperation = newImageOperation;
         }
 
-        public string GetPolishName()
+        public string GetName()
         {
-            return "Cofnij";
+            return "undo";
         }
 
-        public string GetEnglishName()
+        public ComponentResourceManager GetResourceManager()
         {
-            return "Undo";
-        }
-
-        public string GetPolishTooltopName()
-        {
-            return "Cofnij";
-        }
-
-        public string GetEnglishTooltipName()
-        {
-            return "Undo";
+            return new ComponentResourceManager(this.GetType());
         }
     }
 }

@@ -19,30 +19,35 @@ namespace GUI
 {
     public partial class ImageEditor : Form
     {
+        private Dictionary<string, ComponentResourceManager> resourcesManagers = new Dictionary<string, ComponentResourceManager>();
         private ImageOperation imageOperation;
         List<Type> pluginTypes;
 
         public ImageEditor()
         {
             InitializeComponent();
-            englishToolStripMenuItem.Checked = false;
-            polishToolStripMenuItem.Checked = true;
+            englishToolStripMenuItem.Checked = true;
+            polishToolStripMenuItem.Checked = false;
             imageOperation = new ImageOperation();
             imageOperation.SetPictureBox(pictureBox);
             Undo undo = new Undo();
             Redo redo = new Redo();
-            AddToolItem(undo);
-            AddToolItem(redo);
+            AddToolItem(undo, "Undo changes");
+            AddToolItem(redo, "Redo changes");
             LoadPlugins();
+            ChangeCulture(new CultureInfo("en"));
         }
 
-        private void AddToolItem(IPlugin plugin)
+        private void AddToolItem(IPlugin plugin, string tooltip = "")
         {
             plugin.SetImageOperation(imageOperation);
             ToolStripButton stripButton = new ToolStripButton();
-            stripButton.Name = plugin.GetType().ToString();
+            stripButton.Name = plugin.GetName();
             stripButton.Image = plugin.GetImage();
-            stripButton.ToolTipText = "TODO";
+            if (String.Equals(tooltip, ""))
+                stripButton.ToolTipText = plugin.GetResourceManager().GetString(plugin.GetName() + "." + Thread.CurrentThread.CurrentUICulture + ".ToolTipText", Thread.CurrentThread.CurrentUICulture);
+            else
+                stripButton.ToolTipText = tooltip;
             stripButton.Click += plugin.ProcessImage;
             stripButton.Click += ProcessToolClick;
             toolStrip.Items.Add(stripButton);
@@ -96,10 +101,6 @@ namespace GUI
             ComponentResourceManager resources = new ComponentResourceManager(typeof(ImageEditor));
             List<string> dllFiles = new List<string>();
             pluginTypes = new List<Type>();
-            //ResourceReader enResources = new ResourceReader(".\\ImageEditor.resx");
-            //ResourceReader plResources = new ResourceReader(".\\ImageEdit.pl.resx");
-
-            ResourceManager rM = new ResourceManager(typeof(ImageEditor));
 
             EnumFiles(".", ref dllFiles);
 
@@ -107,10 +108,20 @@ namespace GUI
             {
                 var pluginAssembly = Assembly.LoadFrom(file);
 
-                var types = pluginAssembly.GetTypes();
+                Type[] types;
+                try
+                {
+                    types = pluginAssembly.GetTypes();
+                }
+                catch (ReflectionTypeLoadException e)
+                {
+                    types = e.Types;
+                }
 
                 foreach (var type in types)
                 {
+                    if (type == null)
+                        continue;
                     Type contract = type.GetInterfaces().FirstOrDefault();
                     if (contract != null && !type.IsAbstract)
                     {
@@ -121,11 +132,8 @@ namespace GUI
                         {
                             AddToolItem(w);
                             pluginTypes.Add(type);
-                            //pluginAssembly.GetManifestResourceInfo("RotateLeft");
-                            //// "test" is your image name
-                            //ResourceManager resourcemanager = new ResourceManager("RotateLeft.Properties", pluginAssembly);
-                            //object obj = resourcemanager.GetObject("RotateLeftText", new global::System.Globalization.CultureInfo("en-US"));
-                            //string tekst = (string)obj;
+                            ComponentResourceManager cM = w.GetResourceManager();
+                            resourcesManagers.Add(w.GetName(), w.GetResourceManager());
                         }
                     }
                 }
@@ -168,15 +176,30 @@ namespace GUI
         }
 
         private void UpdateControlsCulture(Control control, ComponentResourceManager resourceProvider,
-            CultureInfo culture)
+    CultureInfo culture)
         {
             control.SuspendLayout();
             resourceProvider.ApplyResources(control, control.Name, culture);
 
             foreach (Control ctrl in control.Controls)
             {
-                //toolTip.SetToolTip(ctrl, resourceProvider.GetString(ctrl.Name + ".ToolTip"));
                 UpdateControlsCulture(ctrl, resourceProvider, culture);
+            }
+
+            PropertyInfo property = control.GetType().GetProperty("Items");
+            if (property != null)
+            {
+                foreach (var item in (ToolStripItemCollection)property.GetValue(control, null))
+                {
+                    if (item is ToolStripButton)
+                    {
+                        UpdateToolStripButtonCulture((ToolStripButton)item, resourceProvider, culture);
+                    }
+                    else if (item is ToolStripMenuItem)
+                    {
+                        UpdateToolStripItemsCulture((ToolStripMenuItem)item, resourceProvider, culture);
+                    }
+                }
             }
 
             control.ResumeLayout(false);
@@ -193,6 +216,18 @@ namespace GUI
                     UpdateToolStripItemsCulture(it, resourceProvider, culture);
                 }
             }
+        }
+
+        private void UpdateToolStripButtonCulture(ToolStripButton item, ComponentResourceManager resourceProvider, CultureInfo culture)
+        {
+            string text = resourceProvider.GetString(item.Name + ".ToolTipText", culture);
+            if(text == null)
+            {
+                resourcesManagers.TryGetValue(item.Name, out ComponentResourceManager cM);
+                if (cM != null)
+                    text = cM.GetString(item.Name + "." + culture.Name + ".ToolTipText", culture);
+            }
+            item.ToolTipText = text;
         }
         #endregion
     }

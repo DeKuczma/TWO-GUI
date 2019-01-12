@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="InterfaceBridge, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\TWO-GUI\InterfaceBridge\InterfaceBridge\bin\Debug\InterfaceBridge.dll</HintPath>
+      <HintPath>..\..\GUI\GUI\bin\Debug\InterfaceBridge.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RotateRight.cs" />
+    <Compile Include="RotateRight90.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -64,6 +64,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RotateRight90.pl.resx">
+      <DependentUpon>RotateRight90.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RotateRight90.resx">
+      <DependentUpon>RotateRight90.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
