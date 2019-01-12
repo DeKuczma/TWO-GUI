@@ -32,13 +32,13 @@ namespace GUI
             imageOperation.SetPictureBox(pictureBox);
             Undo undo = new Undo();
             Redo redo = new Redo();
-            AddToolItem(undo, "Undo changes");
-            AddToolItem(redo, "Redo changes");
+            AddToolItem(undo, "Undo changes", "Undo");
+            AddToolItem(redo, "Redo changes", "Redo");
             LoadPlugins();
             ChangeCulture(new CultureInfo("en"));
         }
 
-        private void AddToolItem(IPlugin plugin, string tooltip = "")
+        private void AddToolItem(IPlugin plugin, string tooltip = "", string text = "")
         {
             plugin.SetImageOperation(imageOperation);
             ToolStripButton stripButton = new ToolStripButton();
@@ -49,13 +49,16 @@ namespace GUI
             else
                 stripButton.ToolTipText = tooltip;
             stripButton.Click += plugin.ProcessImage;
-            stripButton.Click += ProcessToolClick;
             toolStrip.Items.Add(stripButton);
-        }
 
-        private void ProcessToolClick(object sender, EventArgs e)
-        {
+            if (!String.Equals(text, ""))
+                return;
 
+            ToolStripMenuItem toolStripItem = new ToolStripMenuItem();
+            toolStripItem.Name = plugin.GetName();
+            toolStripItem.Text = plugin.GetResourceManager().GetString(plugin.GetName() + "." + Thread.CurrentThread.CurrentUICulture + ".Text", Thread.CurrentThread.CurrentUICulture);
+            toolStripItem.Click += plugin.ProcessImage;
+            editToolStripMenuItem.DropDownItems.Add(toolStripItem);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -207,7 +210,14 @@ namespace GUI
 
         private void UpdateToolStripItemsCulture(ToolStripItem item, ComponentResourceManager resourceProvider, CultureInfo culture)
         {
-            resourceProvider.ApplyResources(item, item.Name, culture);
+            string text = resourceProvider.GetString(item.Name + ".Text", culture);
+            if (text == null)
+            {
+                resourcesManagers.TryGetValue(item.Name, out ComponentResourceManager cM);
+                if (cM != null)
+                    text = cM.GetString(item.Name + "." + culture.Name + ".Text", culture);
+            }
+            item.Text = text;
 
             if (item is ToolStripMenuItem)
             {
@@ -230,5 +240,15 @@ namespace GUI
             item.ToolTipText = text;
         }
         #endregion
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imageOperation.UndoImage();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            imageOperation.RedoImage();
+        }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RotateLeft.Properties {
+namespace RotateLeft {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RotateLeft.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RotateLeft {
+    internal class RotateLeft90 {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RotateLeft() {
+        internal RotateLeft90() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RotateLeft.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RotateLeft.Properties.RotateLeft", typeof(RotateLeft).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RotateLeft.RotateLeft90", typeof(RotateLeft90).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,18 +63,36 @@ namespace RotateLeft.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Rotate left.
         /// </summary>
-        internal static string RotateLeftText {
+        internal static string rotateLeft90_en_Text {
             get {
-                return ResourceManager.GetString("RotateLeftText", resourceCulture);
+                return ResourceManager.GetString("rotateLeft90.en.Text", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Rotate image left by 90 degrees.
         /// </summary>
-        internal static string RotateLeftTooltip {
+        internal static string rotateLeft90_en_ToolTipText {
             get {
-                return ResourceManager.GetString("RotateLeftTooltip", resourceCulture);
+                return ResourceManager.GetString("rotateLeft90.en.ToolTipText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obróć w lewo.
+        /// </summary>
+        internal static string rotateLeft90_pl_Text {
+            get {
+                return ResourceManager.GetString("rotateLeft90.pl.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obróc obrazek w prawo o 90 stopni.
+        /// </summary>
+        internal static string rotateLeft90_pl_ToolTipText {
+            get {
+                return ResourceManager.GetString("rotateLeft90.pl.ToolTipText", resourceCulture);
             }
         }
     }

@@ -38,7 +38,7 @@
   <ItemGroup>
     <Reference Include="InterfaceBridge, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\TWO-GUI\InterfaceBridge\InterfaceBridge\bin\Debug\InterfaceBridge.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\TWO-GUI\GUI\GUI\bin\Debug\InterfaceBridge.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RotateLeft90.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RotateLeft90.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,23 +67,20 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <Resource Include="Properties\RotateLeft.pl.resx" />
-    <Resource Include="Properties\RotateLeft.resx">
+    <EmbeddedResource Include="RotateLeft90.pl.resx">
+      <DependentUpon>RotateLeft90.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RotateLeft90.resx">
+      <DependentUpon>RotateLeft90.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>RotateLeft.Designer.cs</LastGenOutput>
-    </Resource>
+      <LastGenOutput>RotateLeft90.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\RotateLeft.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RotateLeft.resx</DependentUpon>
-    </Compile>
-    <Compile Include="RotateLeft.cs" />
+    <Compile Include="RotateLeft90.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

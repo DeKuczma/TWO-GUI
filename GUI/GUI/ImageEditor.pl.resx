@@ -164,13 +164,13 @@
     <value>Plik</value>
   </data>
   <data name="undoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="undoToolStripMenuItem.Text" xml:space="preserve">
     <value>Cofnij</value>
   </data>
   <data name="redoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="redoToolStripMenuItem.Text" xml:space="preserve">
     <value>Wykonaj ponownie</value>
@@ -186,11 +186,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Edytor zdjęć</value>
-  </data>
-  <data name="redo.ToolTipText" xml:space="preserve">
-    <value>Wykonaj ponownie</value>
-  </data>
-  <data name="undo.ToolTipText" xml:space="preserve">
-    <value>Cofnij</value>
   </data>
 </root>

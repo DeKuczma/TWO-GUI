@@ -8,11 +8,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using InterfaceBridge;
 
-class RotateLeft : IPlugin
+class RotateLeft90 : IPlugin
 {
     private IImageOperation imageOperation;
 
     private Bitmap processedBitmap;
+    private ComponentResourceManager cM;
 
     public Bitmap GetImage()
     {
@@ -21,6 +22,9 @@ class RotateLeft : IPlugin
 
     public void ProcessImage(object sender, EventArgs e)
     {
+        if (imageOperation.IsBusy())
+            return;
+        imageOperation.ChangeState();
         BackgroundWorker backgroundWorker = new BackgroundWorker();
         backgroundWorker.DoWork += DoWork;
         backgroundWorker.RunWorkerCompleted += Update;
@@ -30,15 +34,21 @@ class RotateLeft : IPlugin
     private void DoWork(object sender, DoWorkEventArgs e)
     {
         Bitmap actualBitmap = imageOperation.GetActualImage();
-        processedBitmap = (Bitmap)actualBitmap.Clone();
-        processedBitmap.SetResolution(actualBitmap.Height, actualBitmap.Width);
-        processedBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
-        Thread.Sleep(100);
+        if (actualBitmap != null)
+        {
+            processedBitmap = (Bitmap)actualBitmap.Clone();
+            processedBitmap.SetResolution(actualBitmap.Height, actualBitmap.Width);
+            processedBitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            Thread.Sleep(100);
+        }
+        else
+            processedBitmap = null;
     }
 
     private void Update(object sender, RunWorkerCompletedEventArgs e)
     {
         imageOperation.ChangeImage(processedBitmap);
+        imageOperation.ChangeState();
     }
 
     public void SetImageOperation(IImageOperation imageOperation)
@@ -46,23 +56,15 @@ class RotateLeft : IPlugin
         this.imageOperation = imageOperation;
     }
 
-    public string GetPolishName()
+    public string GetName()
     {
-        return "Obróc w lewo";
+        return "rotateLeft90";
     }
 
-    public string GetEnglishName()
+    public ComponentResourceManager GetResourceManager()
     {
-        return "Rotate left";
-    }
-
-    public string GetPolishTooltopName()
-    {
-        return "Obróć obrazek w lewo o 90 stopni";
-    }
-
-    public string GetEnglishTooltipName()
-    {
-        return "Rotate image left by 90 degrees";
+        if (cM == null)
+            cM = new ComponentResourceManager(this.GetType());
+        return cM;
     }
 }
